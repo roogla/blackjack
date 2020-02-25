@@ -1,21 +1,16 @@
 import random
+import os
 
 
 class Player:
 
     def __init__(self):
-        self.bank_amt = 25
+        self.bank = 25
         self.hand = []
         self.bet = None
 
-    def bank(self, win):
-        pass
-
     def hit(self, deck):
         self.hand.append(deck.deal())
-
-    def bet(self):
-        pass
 
 
 class Dealer:
@@ -47,3 +42,38 @@ class Deck:
         card = self.shuffled_deck[-1]
         self.shuffled_deck.pop()
         return card
+
+
+def win(hand):
+    for cards in hand:
+        print(f'{cards} debug')
+
+
+def table(state, player, dealer, deck):
+    if state == 1:
+        Player.bet = int(input('enter a bet amount\n>>>'))
+
+    elif state == 2:
+
+        win(player.hand)
+
+        player_choice = input('hit or stand?:\n>>>')
+
+        if player_choice == 'hit':
+            player.hit(deck)
+        elif player_choice == 'stand':
+            win(player.hand)
+
+    elif state == 3:
+        # begin dealer logic
+        print('ass')
+    print(''.join(str(c) for c in dealer.hand))
+    print(''.join(str(c) for c in player.hand))
+
+
+d = Deck()
+r = Player()
+a = Dealer()
+d.shuffle()
+
+
